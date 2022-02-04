@@ -7,10 +7,13 @@ export const LocationContext = React.createContext();
 export const LocationContextProvider = ({ children }) => {
   const [keyword, setKeyword] = useState("San francisco");
   const [location, setLocation] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingL, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const onSearch = (searchKeyword) => {
+    if (searchKeyword === keyword) {
+      return;
+    }
     setIsLoading(true);
     setKeyword(searchKeyword);
   };
@@ -37,7 +40,7 @@ export const LocationContextProvider = ({ children }) => {
   return (
     <LocationContext.Provider
       value={{
-        isLoading,
+        isLoadingL,
         error,
         location,
         search: onSearch,
